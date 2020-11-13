@@ -9,5 +9,5 @@ RUN apk add --no-cache curl \
   && curl -sL https://github.com/xiaokaixuan/gost-heroku/releases/download/v${VER}/gost_${VER}_linux_amd64.tar.gz | tar zx \
   && chmod +x gost_${VER}_linux_amd64/gost
 
-CMD /gost_${VER}_linux_amd64/gost -L=ss+mws://$METHOD:$PASSWORD@:$PORT
+CMD /gost_${VER}_linux_amd64/gost -L=socks+mws://$METHOD:$PASSWORD@:$PORT
 
