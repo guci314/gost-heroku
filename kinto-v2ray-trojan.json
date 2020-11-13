@@ -1,0 +1,60 @@
+{
+  "inbounds": [
+    {
+      "port": 10999,
+      "protocol": "socks",
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
+      },
+      "settings": {
+        "auth": "noauth"
+      }
+    },
+    {
+      "listen": "127.0.0.1",
+      "port": 10998,
+      "protocol": "http",
+      "settings": {
+        "userLevel": 8
+      },
+      "tag": "http"
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "trojan",
+      "settings": {
+        "servers": [
+          {
+            "address": "104.16.48.239",
+            "port": 443,
+            "password": "password"
+          }
+        ]
+      },
+      "mux": {
+        "enabled": false,
+        "concurrency": 8
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "allowInsecure": true,
+            "serverName": "kinto-trojan.guci.workers.dev"
+        },
+        "wssettings": {
+          "connectionReuse": true,
+          "headers": {
+            "Host": "kinto-trojan.guci.workers.dev"
+          },
+          "path": "/trojanpass"
+        }
+      }
+    }
+  ]
+}
