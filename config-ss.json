@@ -1,0 +1,88 @@
+{
+  "dns": {
+    "servers": [
+      "1.1.1.1"
+    ]
+  },
+  "inbounds": [
+    {
+      "listen": "127.0.0.1",
+      "port": 10999,
+      "protocol": "socks",
+      "settings": {
+        "auth": "noauth",
+        "udp": true,
+        "userLevel": 8
+      },
+      "sniffing": {
+        "destOverride": [
+          "http",
+          "tls"
+        ],
+        "enabled": true
+      },
+      "tag": "socks"
+    },
+    {
+      "listen": "127.0.0.1",
+      "port": 10998,
+      "protocol": "http",
+      "settings": {
+        "userLevel": 8
+      },
+      "tag": "http"
+    }
+  ],
+  "log": {
+    "loglevel": "warning"
+  },
+  "outbounds": [
+    {
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "guciss.herokuapp.com",
+            "port": 80,
+            "method": "aes-256-cfb",
+            "password": "700127",
+            "ota": false
+          }
+        ]
+      },
+      "mux": {
+        "enabled": false
+      },
+      "streamSettings": {
+        "network": "ws",
+        "security": "",
+        "tlsSettings": {
+          "allowInsecure": true,
+            "serverName": "guciss.herokuapp.com"
+        },
+        "wsSettings": {
+          "connectionReuse": true,
+          "headers": {
+            "Host": "guciss.herokuapp.com"
+          },
+          "path": ""
+        }
+      }
+    },
+    {
+      "protocol": "freedom",
+      "settings": {},
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "settings": {
+        "response": {
+          "type": "http"
+        }
+      },
+      "tag": "block"
+    }
+  ],
+  "stats": {}
+}
